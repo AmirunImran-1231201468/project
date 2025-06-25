@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout - Milkshake Haven</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      padding: 30px;
+    }
+    .checkout-container {
+      max-width: 600px;
+      margin: auto;
+      background-color: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(128, 0, 128, 0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #800080;
+    }
+    .summary {
+      margin: 20px 0;
+    }
+    .summary p {
+      font-size: 18px;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    select, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #800080;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #660066;
+    }
+    .success {
+      text-align: center;
+      color: green;
+      margin-top: 20px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="checkout-container">
+    <h2>Checkout</h2>
+
+    <div class="summary">
+      <p><strong>Total:</strong> $ <span id="totalPrice">0.00</span></p>
+    </div>
+
+    <label for="paymentMethod">Choose Payment Method:</label>
+    <select id="paymentMethod">
+      <option value="">-- Select --</option>
+      <option value="online">Online Banking</option>
+      <option value="touchngo">Touch 'n Go</option>
+      <option value="shopee">Shopee SPayLater</option>
+    </select>
+
+    <button onclick="confirmPayment()">Confirm & Pay</button>
+
+    <div class="success" id="successMsg">✅ Payment Successful! Thank you for your order.</div>
+  </div>
+
+  <script>
+    // Simulate total from cart
+    const total = localStorage.getItem("cartTotal") || "15.90"; // fallback if none set
+    document.getElementById("totalPrice").textContent = parseFloat(total).toFixed(2);
+
+    function confirmPayment() {
+      const paymentMethod = document.getElementById("paymentMethod").value;
+
+      if (!paymentMethod) {
+        alert("Please select a payment method.");
+        return;
+      }
+
+      // Simulate processing...
+      alert("Processing payment with: " + paymentMethod);
+      document.getElementById("successMsg").style.display = "block";
+
+      // Clear cart or reset data here
+      localStorage.removeItem("cart");
+      localStorage.removeItem("cartTotal");
+    }
+  </script>
+</body>
+</html>

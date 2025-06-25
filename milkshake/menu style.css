@@ -1,0 +1,44 @@
+/* Milkshake Mania Section */
+.milkshake-section {
+    padding: 60px 0;
+    background-color: #fff0f5; /* Soft pink */
+    text-align: center;
+}
+
+.section-title {
+    font-size: 32px;
+    color: #800080;
+    margin-bottom: 40px;
+    font-family: 'Segoe Script', cursive;
+}
+
+.milkshake-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.milkshake-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2); /* Pinkish shadow */
+    transition: transform 0.3s ease;
+}
+
+.milkshake-card:hover {
+    transform: translateY(-5px);
+}
+
+.milkshake-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.milkshake-card p {
+    padding: 15px;
+    font-size: 18px;
+    color: #4a004a;
+    font-weight: 600;
+}

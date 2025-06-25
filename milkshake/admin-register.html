@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Register</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ffe6f0, #fff0f5);
+      padding: 50px;
+    }
+
+    .form-container {
+      width: 400px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 105, 180, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      color: #800080;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: 1px solid #ff69b4;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 25px;
+      background-color: #ff8c00;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #e67300;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Admin Registration</h2>
+    <input type="text" id="username" placeholder="Create Username" />
+    <input type="password" id="password" placeholder="Create Password" />
+    <button onclick="register()">Register</button>
+  </div>
+
+  <script>
+    function register() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      if (!username || !password) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      localStorage.setItem("adminUsername", username);
+      localStorage.setItem("adminPassword", password);
+
+      alert("Admin registered successfully!");
+      window.location.href = "admin_login.html";
+    }
+  </script>
+</body>
+</html>

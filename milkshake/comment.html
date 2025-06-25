@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Us - Milkshake Haven</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Color Palette */
+        :root {
+            --purple: #8A2BE2;       /* Vibrant purple */
+            --pink-orange: #FF6B8B;  /* Pink-orange blend */
+            --light-purple: #E6E6FA; /* Lavender background */
+            --dark-text: #4B0082;    /* Dark purple for text */
+            --white: #FFFFFF;
+            --light-gray: #F8F8FF;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-purple);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--purple), var(--pink-orange));
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--white);
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        /* Comments & Ratings Section */
+        .feedback-section {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.1);
+            margin: 40px 0;
+            border: 1px solid rgba(138, 43, 226, 0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--purple);
+            position: relative;
+            font-size: 28px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--purple), var(--pink-orange));
+            border-radius: 2px;
+        }
+        
+        /* Rating Form */
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--purple);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #E6E6FA;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--pink-orange);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 139, 0.2);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Star Rating */
+        .rating-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+        }
+        
+        .rating input {
+            display: none;
+        }
+        
+        .rating label {
+            font-size: 36px;
+            color: #E6E6FA;
+            cursor: pointer;
+            padding: 0 8px;
+            transition: all 0.2s;
+        }
+        
+        .rating input:checked ~ label,
+        .rating input:hover ~ label,
+        .rating label:hover,
+        .rating label:hover ~ label {
+            color: var(--pink-orange);
+            transform: scale(1.1);
+        }
+        
+        /* Submit Button */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--purple), var(--pink-orange));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
+        }
+        
+        /* Customer Reviews */
+        .reviews-container {
+            margin-top: 60px;
+        }
+        
+        .review {
+            background-color: var(--light-gray);
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--pink-orange);
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .reviewer-name {
+            font-weight: 700;
+            color: var(--purple);
+            font-size: 18px;
+        }
+        
+        .review-date {
+            color: #9370DB;
+            font-size: 14px;
+        }
+        
+        .review-rating {
+            color: var(--pink-orange);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .review-text {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--purple), var(--pink-orange));
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: white;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-section ul li a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: white;
+            color: var(--purple);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 30px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Floating Milkshake Icon */
+        .milkshake-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--purple), var(--pink-orange));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
+            cursor: pointer;
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Milkshake Haven</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="order.html">Order</a></li>
+                    <li><a href="about.html">About</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <section class="feedback-section">
+            <h2 class="section-title">Share Your Milkshake Experience</h2>
+            
+            <div class="feedback-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="milkshake">Which Milkshake Did You Try?</label>
+                        <select id="milkshake" name="milkshake" required>
+                            <option value="">Select your milkshake</option>
+                            <option value="berry-bliss">Berry Bliss</option>
+                            <option value="purple-rain">Purple Rain</option>
+                            <option value="tropical-sunset">Tropical Sunset</option>
+                            <option value="lavender-dream">Lavender Dream</option>
+                            <option value="citrus-splash">Citrus Splash</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>How Would You Rate Your Experience?</label>
+                        <div class="rating-container">
+                            <div class="rating">
+                                <input type="radio" id="star5" name="rating" value="5">
+                                <label for="star5" title="Excellent">★</label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" title="Very Good">★</label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3" title="Good">★</label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" title="Fair">★</label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" title="Poor">★</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comment">Your Review</label>
+                        <textarea id="comment" name="comment" placeholder="Tell us about your experience with our milkshakes..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Submit Review
+                    </button>
+                </form>
+            </div>
+            
+            <div class="reviews-container">
+                <h3 class="section-title">What Our Customers Say</h3>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <span class="reviewer-name">Jessica Martinez</span>
+                        <span class="review-date">June 5, 2023</span>
+                    </div>
+                    <div class="review-rating">
+                        ★ ★ ★ ★ ★
+                    </div>
+                    <p class="review-text">
+                        The Purple Rain milkshake is absolutely divine! Perfect blend of berry flavors with just the right amount of sweetness. 
+                        The presentation was Instagram-worthy with edible glitter on top. Delivery was faster than expected too!
+                    </p>
+                </div>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <span class="reviewer-name">Alex Chen</span>
+                        <span class="review-date">June 2, 2023</span>
+                    </div>
+                    <div class="review-rating">
+                        ★ ★ ★ ★ ☆
+                    </div>
+                    <p class="review-text">
+                        Loved the Tropical Sunset shake - the mango and passionfruit combo is refreshing. Only reason for 4 stars is I wish 
+                        there was more whipped cream. But the flavor was spot on and the color was beautiful!
+                    </p>
+                </div>
+                
+                <div class="review">
+                    <div class="review-header">
+                        <span class="reviewer-name">Sophia Williams</span>
+                        <span class="review-date">May 28, 2023</span>
+                    </div>
+                    <div class="review-rating">
+                        ★ ★ ★ ★ ★
+                    </div>
+                    <p class="review-text">
+                        The Lavender Dream is my new obsession! So unique and floral without being perfume-y. The staff even included a cute 
+                        handwritten note with my order. Five stars for flavor and customer service!
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Milkshake Haven</h3>
+                    <p>Purveyors of premium, handcrafted milkshakes that delight your senses and brighten your day.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Our Menu</a></li>
+                        <li><a href="order.html">Order Online</a></li>
+                        <li><a href="about.html">Our Story</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Shake Street, Beverage City</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> hello@milkshakehaven.com</p>
+                </div>
+            </div>
+            
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Milkshake Haven. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Milkshake Icon -->
+    <div class="milkshake-icon">
+        <i class="fas fa-glass-whiskey"></i>
+    </div>
+</body>
+</html>

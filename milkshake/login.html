@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Milkshake Haven</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #fff0f5;
+      padding: 20px;
+    }
+    .form-box {
+      max-width: 400px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(128, 0, 128, 0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #800080;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    button {
+      width: 100%;
+      background-color: #800080;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .link {
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-box">
+    <h2>Login</h2>
+    <input type="text" id="loginUsername" placeholder="Enter Username" required />
+    <input type="password" id="loginPassword" placeholder="Enter Password" required />
+    <button onclick="login()">Login</button>
+    <div class="link">
+      Don't have an account? <a href="signup.html">Sign up</a>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const username = document.getElementById("loginUsername").value;
+      const password = document.getElementById("loginPassword").value;
+
+      const storedUser = JSON.parse(localStorage.getItem("user"));
+
+      if (storedUser && username === storedUser.username && password === storedUser.password) {
+        alert("Login successful!");
+        // Redirect to homepage or order page
+        window.location.href = "menu.html";
+      } else {
+        alert("Invalid username or password!");
+      }
+    }
+  </script>
+</body>
+</html>
